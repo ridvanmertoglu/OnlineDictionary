@@ -9,7 +9,7 @@
 import UIKit
 import Foundation
 
-class FirstViewController: UIViewController {
+class FirstViewController: BaseVC {
 
     @IBOutlet weak var nameLabel: UILabel!
     @IBOutlet weak var textField: UITextField!
@@ -26,35 +26,25 @@ class FirstViewController: UIViewController {
             "x-rapidapi-host": "wordsapiv1.p.rapidapi.com",
             "x-rapidapi-key": "bebb0977a7msh7e8c3ff56cf1a9dp16de43jsn2f87071534b1"
         ]
+        
+        guard let url = URL(string: "https://wordsapiv1.p.rapidapi.com/words/\(textField.text!)") else { return }
 
-        let request = NSMutableURLRequest(url: NSURL(string: "https://wordsapiv1.p.rapidapi.com/words/\(textField.text!)/definitions")! as URL,
-                                                cachePolicy: .useProtocolCachePolicy,
-                                            timeoutInterval: 10.0)
+        var request = URLRequest(url: url,
+                                 cachePolicy: .useProtocolCachePolicy,
+                                 timeoutInterval: 10.0)
         request.httpMethod = "GET"
         request.allHTTPHeaderFields = headers
 
-        let session = URLSession.shared
-        let dataTask = session.dataTask(with: request as URLRequest, completionHandler: { (data, response, error) -> Void in
-            if (error != nil) {
-                print(error ?? "Error")
-            } else {
-                 /*let httpResponse = response as? HTTPURLResponse
-                               print(httpResponse)*/
-                               do {
-                                   let jsonResponse = try JSONSerialization.jsonObject(with: data!, options: JSONSerialization.ReadingOptions.mutableContainers) as! Dictionary<String, Any>
-                                   
-                                   DispatchQueue.main.async {
-                                       print(jsonResponse["definitions"]!)
-                                       /*if let def = jsonResponse["definitions"] as? Array<Any> {
-                                           for element in def {
-                                               print(element)
-                                           }
-                                       }*/
-                                   }
-                                   
-                               } catch {
-                                   print("olmadı")
-                               }
+        let dataTask = URLSession.shared.dataTask(with: request as URLRequest,
+                                                  completionHandler: { (data, response, error) -> Void in
+                                                    
+            if let data = data {
+                do {
+                    let word = try JSONDecoder().decode(Word.self, from: data)
+                    print("")
+                } catch (let error) {
+                    print(error.localizedDescription)
+                }
             }
         })
 
@@ -64,3 +54,11 @@ class FirstViewController: UIViewController {
     
 }
 
+extension Data {
+    var prettyPrintedJSONString: String? {
+        guard let object = try? JSONSerialization.jsonObject(with: self, options: []),
+            let data = try? JSONSerialization.data(withJSONObject: object, options: [.prettyPrinted]),
+            let prettyPrintedString = String(data: data, encoding: .utf8) else { return nil }
+        return prettyPrintedString
+    }
+}
