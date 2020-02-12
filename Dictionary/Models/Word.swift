@@ -10,10 +10,16 @@ import Foundation
 
 final class Word: Decodable {
     var word: String?
-    var definitions: [Definition]?
+    var results: [Result]?
 }
 
-final class Definition: Decodable {
+
+final class Result: Decodable {
     var definition: String?
     var partOfSpeech: String?
+    var synonyms: [String]?
+    var typeOf: [String]?
+    var hasTypes: [String]?
+    var derivation: [String]?
+    var examples: [String]?
 }
