@@ -7,7 +7,6 @@
 //
 
 import UIKit
-import Foundation
 import CoreData
 
 class FirstViewController: BaseVC, UITableViewDelegate, UITableViewDataSource {
@@ -32,20 +31,23 @@ class FirstViewController: BaseVC, UITableViewDelegate, UITableViewDataSource {
     
     
     @IBAction func clickedSearchButton(_ sender: Any) {
-        network(word: textField.text!)
+        fetchWordResults(givenWord: textField.text!)
         
         //bu ikisinin burda olup olmayacagından emin değilim
+        // bu ikisini viewDidLoad da yapınca hata verdi bende orda yapıyordum ama
         tableView.delegate = self
         tableView.dataSource = self
 
         saveWord()
     }
     
+  
+    
     
     /*bu fonksiyonun bir kısmını networkmanager a alacaktım
     fakat ayırınca hatalar cıktı tam olarak nerden bölünmesine karar veremedim.*/
-    func network(word:String) {
-        guard let url = URL(string: "\(Constant.baseUrl)\(word)") else { return }
+    func fetchWordResults(givenWord:String) {
+        guard let url = URL(string: "\(Constant.baseUrl+Constant.wordPath)\(givenWord)") else { return }
         var request = URLRequest(url: url,
                                  cachePolicy: .useProtocolCachePolicy,
                                  timeoutInterval: 10.0)
@@ -58,10 +60,13 @@ class FirstViewController: BaseVC, UITableViewDelegate, UITableViewDataSource {
             if let data = data {
                 do {
                     let word = try JSONDecoder().decode(Word.self, from: data)
-                    for def in word.results! { //unwrap force u optinal a ceviremedim(bu yüzden textField boş iken butona basınca patlıyor)
-                        self.resultArray.append(def)
+                    if let resultsOfWord = word.results {
+                        for def in resultsOfWord {
+                            self.resultArray.append(def)
+                        }
+                        self.numberofRow = word.results?.count ?? 0
                     }
-                    self.numberofRow = word.results?.count ?? 0
+                    
                 } catch (let error) {
                     print(error.localizedDescription)
                 }
@@ -69,6 +74,7 @@ class FirstViewController: BaseVC, UITableViewDelegate, UITableViewDataSource {
         })
         
         dataTask.resume()
+        print("girdi")
     }
     
     //core dataya kelimeleri kaydetmek için bu fonksiyonu yazdım.
@@ -76,7 +82,7 @@ class FirstViewController: BaseVC, UITableViewDelegate, UITableViewDataSource {
         let appDelegate = UIApplication.shared.delegate as! AppDelegate
         let context = appDelegate.persistentContainer.viewContext
         
-        let newWord = NSEntityDescription.insertNewObject(forEntityName: "Words", into: context)
+        let newWord = NSEntityDescription.insertNewObject(forEntityName: "Words", into: context)//NSManagedObject istiyor default olarak unwrap force u ortadan kaldırınca o yüzden kaldıramadım ! i as! deki
         
         newWord.setValue(textField.text, forKey: "wordName")
         newWord.setValue(UUID(), forKey: "id")
@@ -110,12 +116,12 @@ class FirstViewController: BaseVC, UITableViewDelegate, UITableViewDataSource {
     
     //Kelimelerin synonmym lerini ve example sentence ları birleştirmek için bu fonksiyonu yazdım.
     func stringConcatinate(inputArray:Array<String>) -> String {
-        var str = ""
+        var concatinatedString = ""
         for element in inputArray {
-            str += element
-            str += "\n"
+            concatinatedString += element
+            concatinatedString += "\n"
         }
-        return str
+        return concatinatedString
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {

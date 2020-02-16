@@ -8,13 +8,9 @@
 
 import UIKit
 
-class NetworkManager: UIViewController {
+final class NetworkManager {
 
-    override func viewDidLoad() {
-        super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
-    }
+    
     
 
 

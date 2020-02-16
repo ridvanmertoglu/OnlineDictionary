@@ -12,10 +12,10 @@ import CoreData
 class SecondViewController: BaseVC, UITableViewDelegate, UITableViewDataSource{
 
     @IBOutlet private weak var historyTableView: UITableView!
-    var wordArray = [String]()
-    var idArray = [UUID]()
-    var chosenWord = ""
-    var chosenWordId : UUID?
+    private var wordArray = [String]()
+    private var idArray = [UUID]()
+    private var chosenWord = ""
+    private var chosenWordId : UUID?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -33,20 +33,18 @@ class SecondViewController: BaseVC, UITableViewDelegate, UITableViewDataSource{
         let context = appDelegate?.persistentContainer.viewContext
         
         let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "Words")
-        /*let sort = NSSortDescriptor(key: "timestamp", ascending: false)
-        request.sortDescriptors = [sort]*/
         fetchRequest.returnsObjectsAsFaults = false
         
         do {
             let results = try context?.fetch(fetchRequest)
             
-            for result in results as! [NSManagedObject]{ // unwrap force'u ?? yaparak kaldıramadım 
+            for result in results as! [NSManagedObject]{ // unwrap force'u ?? yaparak kaldıramadım
                 if let word = result.value(forKey: "wordName") as? String {
                     if !(wordArray.contains(word)) && word != "" {
                         self.wordArray.insert(word, at: 0)
                     
                         if let id = result.value(forKey: "id") as? UUID {
-                            self.idArray.append(id)
+                            idArray.append(id)
                         }
                     }
                 }
@@ -74,7 +72,7 @@ class SecondViewController: BaseVC, UITableViewDelegate, UITableViewDataSource{
             //destinationVC.selectedWordId = chosenWordId
             print(chosenWord)
             print("entered")
-            destinationVC.network(word: chosenWord) // arama ekranına götürüp bu kelimeyi aramış gibi gösterip tanımların oldugu tableView i göstermek istedim fakat olmadı
+            destinationVC.fetchWordResults(givenWord: chosenWord) // arama ekranına götürüp bu kelimeyi aramış gibi gösterip tanımların oldugu tableView i göstermek istedim fakat olmadı
         }
     }
     
