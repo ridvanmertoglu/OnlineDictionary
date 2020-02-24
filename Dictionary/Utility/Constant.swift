@@ -8,12 +8,4 @@
 
 import Foundation
 
-enum Constant {
-    static let headers = [
-        "x-rapidapi-host": "wordsapiv1.p.rapidapi.com",
-        "x-rapidapi-key": "bebb0977a7msh7e8c3ff56cf1a9dp16de43jsn2f87071534b1"
-    ]
-    static let baseUrl = "https://wordsapiv1.p.rapidapi.com"
-    static let wordPath = "/words/"
-    static let httpMethod = "GET"
-}
+

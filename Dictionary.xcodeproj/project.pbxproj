@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		687D5B1E24031CFC00C62C9D /* WordViewModal.swift in Sources */ = {isa = PBXBuildFile; fileRef = 687D5B1D24031CFC00C62C9D /* WordViewModal.swift */; };
+		687D5B212403DFEB00C62C9D /* URLRequestExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 687D5B202403DFEB00C62C9D /* URLRequestExtension.swift */; };
+		687D5B232403E6B900C62C9D /* DecodableExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 687D5B222403E6B900C62C9D /* DecodableExtension.swift */; };
 		6885D4BE23EDF61F003F03AE /* BaseVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6885D4BD23EDF61F003F03AE /* BaseVC.swift */; };
 		6885D4C023EDF6D7003F03AE /* BaseViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6885D4BF23EDF6D7003F03AE /* BaseViewModel.swift */; };
 		6885D4C223EDFCC9003F03AE /* Word.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6885D4C123EDFCC9003F03AE /* Word.swift */; };
@@ -25,6 +28,9 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		687D5B1D24031CFC00C62C9D /* WordViewModal.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WordViewModal.swift; sourceTree = "<group>"; };
+		687D5B202403DFEB00C62C9D /* URLRequestExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLRequestExtension.swift; sourceTree = "<group>"; };
+		687D5B222403E6B900C62C9D /* DecodableExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DecodableExtension.swift; sourceTree = "<group>"; };
 		6885D4BD23EDF61F003F03AE /* BaseVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseVC.swift; sourceTree = "<group>"; };
 		6885D4BF23EDF6D7003F03AE /* BaseViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseViewModel.swift; sourceTree = "<group>"; };
 		6885D4C123EDFCC9003F03AE /* Word.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Word.swift; sourceTree = "<group>"; };
@@ -55,6 +61,23 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		687D5B1C24031CD700C62C9D /* ViewModels */ = {
+			isa = PBXGroup;
+			children = (
+				687D5B1D24031CFC00C62C9D /* WordViewModal.swift */,
+			);
+			path = ViewModels;
+			sourceTree = "<group>";
+		};
+		687D5B1F2403DFD000C62C9D /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				687D5B202403DFEB00C62C9D /* URLRequestExtension.swift */,
+				687D5B222403E6B900C62C9D /* DecodableExtension.swift */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
 		8C043C8B23EC38C100E0E587 = {
 			isa = PBXGroup;
 			children = (
@@ -74,15 +97,17 @@
 		8C043C9623EC38C100E0E587 /* Dictionary */ = {
 			isa = PBXGroup;
 			children = (
-				8C5A3EBE23F42ED100915659 /* Managers */,
-				8C5A3E9123F2183000915659 /* Base */,
-				8C5A3E9023F217BD00915659 /* Resources */,
-				8C5A3E8F23F2179200915659 /* Models */,
-				8C5A3E8E23F2174600915659 /* ViewControllers */,
-				8C5A3E8D23F2172300915659 /* Utility */,
 				8C043C9723EC38C100E0E587 /* AppDelegate.swift */,
 				8C043C9923EC38C100E0E587 /* SceneDelegate.swift */,
 				8C043CA723EC38C400E0E587 /* Info.plist */,
+				8C5A3E9123F2183000915659 /* Base */,
+				687D5B1F2403DFD000C62C9D /* Extensions */,
+				8C5A3EBE23F42ED100915659 /* Managers */,
+				8C5A3E8F23F2179200915659 /* Models */,
+				8C5A3E9023F217BD00915659 /* Resources */,
+				8C5A3E8D23F2172300915659 /* Utility */,
+				8C5A3E8E23F2174600915659 /* ViewControllers */,
+				687D5B1C24031CD700C62C9D /* ViewModels */,
 			);
 			path = Dictionary;
 			sourceTree = "<group>";
@@ -224,6 +249,9 @@
 				8C5A3E9323F2194100915659 /* Constant.swift in Sources */,
 				8C5A3EB923F4117B00915659 /* Dictionary.xcdatamodeld in Sources */,
 				8C043C9823EC38C100E0E587 /* AppDelegate.swift in Sources */,
+				687D5B212403DFEB00C62C9D /* URLRequestExtension.swift in Sources */,
+				687D5B1E24031CFC00C62C9D /* WordViewModal.swift in Sources */,
+				687D5B232403E6B900C62C9D /* DecodableExtension.swift in Sources */,
 				8C043C9A23EC38C100E0E587 /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

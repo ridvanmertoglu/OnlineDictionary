@@ -13,5 +13,5 @@ class BaseVC: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
     }
-    //Burada hangi methodları kullanacagım tam karar veremedim.
+    
 }

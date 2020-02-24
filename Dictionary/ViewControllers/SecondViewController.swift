@@ -68,11 +68,10 @@ class SecondViewController: BaseVC, UITableViewDelegate, UITableViewDataSource{
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "toFirstViewController" {
             let destinationVC = segue.destination as! FirstViewController
-            //destinationVC.textField.text = chosenWord
-            //destinationVC.selectedWordId = chosenWordId
+            destinationVC.selectedWord = chosenWord
+            destinationVC.selectedWordId = chosenWordId
             print(chosenWord)
             print("entered")
-            destinationVC.fetchWordResults(givenWord: chosenWord) // arama ekranına götürüp bu kelimeyi aramış gibi gösterip tanımların oldugu tableView i göstermek istedim fakat olmadı
         }
     }
     
